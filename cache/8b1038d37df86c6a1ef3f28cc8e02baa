@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="post" method="post">
+        <input type="text" name="dddd" id="">
+        <button>Post Et</button>
+    </form>
+
+    <?php echo $flash['error']; ?>
+
+    <hr>
+    <?php echo Tuva::url('/hakkımızda/panpa'); ?>
+    <hr>
+    <?php echo Tuva::assets('genel.png'); ?>
+    <hr>
+    <?php echo Tuva::css('genel.css'); ?>
+    <hr>
+
+    <hr>
+    <?php echo Tuva::js('genel.js'); ?>
+    <hr>
+
+    <hr>
+    Haberler dili : <?php echo Tuva::lang('Haberler'); ?>
+    <hr>
+
+    <hr>
+    Haberler dili : <?php echo LANG; ?>
+    <hr>
+
+    <hr>
+    Dil Degiştir: <a href="<?php echo Tuva::url('/lang/tr'); ?>"> Seç</a>
+    <hr>
+
+....
+</body>
+</html>
+
+ <?php echo $user; ?>

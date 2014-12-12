@@ -1,0 +1,15 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "clickcoder/slim-blade": "dev-master",
+        "illuminate/database": "*",
+        "swiftmailer/swiftmailer": "@stable"
+    },
+    "autoload": {
+        "files": [ "app/config.php" ],
+        "classmap": [
+            "app/controllers",
+            "app/models"
+        ]
+    }
+}
