@@ -1,11 +1,11 @@
 <?php
 
-class UserSeed {
-
-    function run()
+class UserSeed
+{
+    public function run()
     {
-        $user = new User;
-        $user->username = "Test User";
+        $user = new User();
+        $user->username = 'Test User';
         $user->save();
     }
 }
