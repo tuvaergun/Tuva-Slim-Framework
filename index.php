@@ -1,33 +1,34 @@
 <?php
+
 ob_start();
 session_start();
 
 require_once 'vendor/autoload.php';
 
-$app = new Slim\Slim(array(
-    'view' => new \Slim\Views\Blade(),
+$app = new Slim\Slim([
+    'view'           => new \Slim\Views\Blade(),
     'templates.path' => 'app/view',
-));
+]);
 
 define('LANG', Tuva::dil());
 
-$app->add(new \Slim\Middleware\SessionCookie(array('secret' => 'TuvaDeveloperSecret')));
+$app->add(new \Slim\Middleware\SessionCookie(['secret' => 'TuvaDeveloperSecret']));
 
-$app->config(array(
-    'view' => new \Slim\Views\Blade(),
+$app->config([
+    'view'               => new \Slim\Views\Blade(),
     'cookies.secret_key' => 'TuvaDeveloperSecret',
-    'log.enable' => true,
-    'log.path'   => 'app/logs',
-    'log.level'  => 4,
-    'debug'      => true,
-    'sessions.files' => 'app/session'
-));
+    'log.enable'         => true,
+    'log.path'           => 'app/logs',
+    'log.level'          => 4,
+    'debug'              => true,
+    'sessions.files'     => 'app/session',
+]);
 
 $view = $app->view();
-$view->parserOptions = array(
+$view->parserOptions = [
     'debug' => true,
-    'cache' => dirname(__FILE__) . '/cache'
-);
+    'cache' => dirname(__FILE__).'/cache',
+];
 
 $Input = $app->request();
 
@@ -39,21 +40,17 @@ foreach ($routers as $router) {
     require_once $router;
 }
 
-
 $app->run();
 
-
-/**
+/*
  * Log tutuyor...
  */
 if ($logs = Log::where('ip', $app->request->getIp())->where('agent', $app->request->getUserAgent())->first()) {
     $logs->hit += 1;
     $logs->save();
-}else{
-    $newlogs = new Log;
+} else {
+    $newlogs = new Log();
     $newlogs->ip = $app->request->getIp();
     $newlogs->agent = $app->request->getUserAgent();
     $newlogs->save();
 }
-
-
